@@ -12,6 +12,8 @@ import Logout from './pages/Logout';
 import ErrorPage from './pages/ErrorPage';
 import { useState, useEffect } from 'react';
 import { UserProvider } from './UserContext';
+import Course from './pages/Course';
+
 
 
 
@@ -49,7 +51,7 @@ function App() {
         })
       }
   })
-  })
+  }, [])
 
   return (
     <>
@@ -62,6 +64,7 @@ function App() {
                 <Route path='/login' element={<Login/>}/>
                 <Route path='/register' element={<Register/>}/>
                 <Route path='/logout' element={<Logout/>}/>
+                <Route path='/courses' element={<Course/>}/>
                 <Route path='*' element={<ErrorPage/>}/>
               </Routes>
           </Container>

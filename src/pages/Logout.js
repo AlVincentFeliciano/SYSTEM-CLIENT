@@ -9,13 +9,20 @@ export default function Logout(){
 
     const navigate = useNavigate();
 
-    unsetUser();
+    
 
     useEffect(() => {
-            setUser({token: null})
+        unsetUser();
+            setUser({
+                id: null,
+                isAdmin: null
+        })
+    }, [])
 
-    })
+
     return(
-        <><Navigate to="/login"/></>
+        <>
+        <Navigate to="/login"/>
+        </>
     )
 }

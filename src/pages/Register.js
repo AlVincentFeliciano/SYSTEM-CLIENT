@@ -1,11 +1,17 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { Container, Row, Col, Button, Form } from "react-bootstrap";
 import Swal from "sweetalert2";
+import UserContext from "../UserContext";
+import { Navigate } from "react-router-dom";
+
+
 
 
 
 
 export default function Register(){
+
+    const {user} = useContext(UserContext);
 
     let [firstName, setFirstName] = useState("");
     let [middleName, setMiddleName] = useState("");
@@ -56,6 +62,9 @@ export default function Register(){
     }
 
     return(
+            user.id !== null ?
+            <Navigate to="/"/>
+            :
         <Container fluid className="vh-100">
             <Row>
                 <Col className="vh-100 bg-warning col-6 d-flex flex-column align-items-center justify-content-center">

@@ -2,40 +2,23 @@ import { useState } from "react";
 import { Card, Button } from "react-bootstrap";
 
 
-export default function CourseCard(){
-    let [count, setCount] = useState(0);
+export default function CourseCard({coursesData}){
 
-    // function sayHi(){
-    //     console.log("Hi!");
-    // }
-
-    function enroll(){
-        if(count !== 30){
-            setCount(count + 1);
-        }else{
-            alert("No slots available.");
-        }
-        
-    }
+  const {_id, name, description, price} = coursesData;
 
     return(
     <Card style={{ width: '18rem' }}>
       <Card.Img variant="top" src="holder.js/100px180" />
       <Card.Body>
-        <Card.Title>Sample Course</Card.Title>
-        <Card.Subtitle>Description</Card.Subtitle>
+        <Card.Title>{name}</Card.Title>
         <Card.Text>
-          Sample Description
+          {description}
         </Card.Text>
         <Card.Subtitle>Price</Card.Subtitle>
         <Card.Text>
-          10, 000
+          {price}
         </Card.Text>
-        <Card.Subtitle>Enrollees</Card.Subtitle>
-        <Card.Text>
-          {count}
-        </Card.Text>
-        <Button variant="primary" onClick={enroll}>Enroll</Button>
+        <Button variant="primary">Enroll</Button>
       </Card.Body>
     </Card>
     )
