@@ -10,7 +10,7 @@ import Register from './pages/Register';
 import Login from './pages/Login';
 import Logout from './pages/Logout';
 import ErrorPage from './pages/ErrorPage';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { UserProvider } from './UserContext';
 
 
@@ -20,12 +20,36 @@ import { UserProvider } from './UserContext';
 function App() {
 
   const [user, setUser] = useState({
-    token: localStorage.getItem("token")
+    id: null,
+    isAdmin: null
   })
 
   const unsetUser = () => {
     localStorage.clear();
   }
+
+  useEffect(() => {
+    fetch("http://localhost:4000/users/details", {
+      method: "POST",
+      headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`
+      }
+  })
+  .then(result => result.json())
+  .then(data => {
+      if(typeof data.result !== "undefined"){
+        setUser({
+          id: data.result._id,
+          isAdmin: data.result.isAdmin
+        })
+      }else{
+        setUser({
+          id: null,
+          isAdmin: null
+        })
+      }
+  })
+  })
 
   return (
     <>

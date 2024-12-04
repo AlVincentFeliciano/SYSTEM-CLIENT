@@ -1,10 +1,13 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Container, Row, Col, Button, Form } from "react-bootstrap";
 import Swal from "sweetalert2";
+import UserContext from "../UserContext";
 
 
 
 export default function Login(){
+
+    const {user, setUser} = useContext(UserContext);
 
     let [email, setEmail] = useState("");
     let [password, setPassword] = useState("");
@@ -30,7 +33,11 @@ export default function Login(){
                     text: "You can now use our enrollment system",
                     icon: "success"
                 })
-                localStorage.setItem("token", result.token);
+                if(typeof result.token !== "undefined"){
+                    localStorage.setItem("token", result.token);
+                    retrieveUserDetails(result.token);
+                }
+
             }else if(result.code === "USER-NOT-REGISTERED"){
                 Swal.fire({
                     title: "YOU ARE NOT REGISTERED",
@@ -44,6 +51,23 @@ export default function Login(){
                     icon: "error"
                 })
             }
+        })
+    }
+
+    const retrieveUserDetails = (token) => {
+        fetch("http://localhost:4000/users/details", {
+            method: "POST",
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
+        .then(result => result.json())
+        .then(data => {
+            console.log(data);
+            setUser({
+                id: data.result._id,
+                isAdmin: data.result.isAdmin
+            })
         })
     }
 
