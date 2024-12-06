@@ -4,11 +4,11 @@ import { Card, Button } from "react-bootstrap";
 
 export default function CourseCard({coursesData}){
 
-  const {_id, name, description, price} = coursesData;
+  const {_id, imgLink, name, description, price} = coursesData;
 
     return(
-    <Card style={{ width: '18rem' }}>
-      <Card.Img variant="top" src="holder.js/100px180" />
+    <Card className="w-100 p-2 mx-2 my-2 shadow card-height">
+      <Card.Img variant="top" src={imgLink || "https://kvytechnology.com/wp-content/uploads/2024/05/image-2-2.jpg"} className="center-crop"/>
       <Card.Body>
         <Card.Title>{name}</Card.Title>
         <Card.Text>
@@ -18,7 +18,9 @@ export default function CourseCard({coursesData}){
         <Card.Text>
           {price}
         </Card.Text>
-        <Button variant="primary">Enroll</Button>
+        <Card.Footer>
+        <Button variant="primary" className="w-100 rounded-pill">Enroll</Button>
+        </Card.Footer>
       </Card.Body>
     </Card>
     )

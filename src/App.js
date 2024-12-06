@@ -13,6 +13,8 @@ import ErrorPage from './pages/ErrorPage';
 import { useState, useEffect } from 'react';
 import { UserProvider } from './UserContext';
 import Course from './pages/Course';
+import AddCourse from './pages/AddCourse';
+
 
 
 
@@ -65,6 +67,7 @@ function App() {
                 <Route path='/register' element={<Register/>}/>
                 <Route path='/logout' element={<Logout/>}/>
                 <Route path='/courses' element={<Course/>}/>
+                <Route path='/add-course' element={<AddCourse/>}/>
                 <Route path='*' element={<ErrorPage/>}/>
               </Routes>
           </Container>

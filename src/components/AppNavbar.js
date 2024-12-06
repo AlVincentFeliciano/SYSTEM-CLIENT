@@ -21,7 +21,13 @@ export default function AppNavbar(){
                 
                 {
                     (user.id !== null) ?
-                    <Nav.Link as={Link} to="/logout">Logout</Nav.Link>
+                        user.isAdmin === true ?
+                        <>
+                        <Nav.Link as={Link} to="/add-course">Add Course</Nav.Link>
+                        <Nav.Link as={Link} to="/logout">Logout</Nav.Link>
+                        </>
+                        :
+                        <Nav.Link as={Link} to="/logout">Logout</Nav.Link>
                     :
                     <>
                     <Nav.Link as={Link} to="/register">Register</Nav.Link>

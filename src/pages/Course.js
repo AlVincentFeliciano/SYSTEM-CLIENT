@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Container } from "react-bootstrap"
+import { Container, Col, Row } from "react-bootstrap"
 import CourseCard from "../components/CourseCard";
 
 
@@ -10,6 +10,7 @@ export default function Course(){
     const [courses, setCourses] = useState([]);
 
     const fetchCourses = () => {
+        
         fetch("http://localhost:4000/courses/all/active", {
             headers: {
                 Authorization: `Bearer ${localStorage.getItem("token")}`
@@ -21,7 +22,9 @@ export default function Course(){
             if(data.code === "ALL-ACTIVE-COURSES-RESULT"){
                 setCourses(data.result.map(data => {
                     return(
+                    <Col lg={3} sm={12}>    
                         <CourseCard key={data._id} coursesData={data}/>
+                    </Col>
                     )
                 }));
             }else{
@@ -42,7 +45,11 @@ export default function Course(){
             <p className="mb-5">Please select and enroll to your desired program and course.</p>
 
             <Container fluid className="bg-secondary p-3">
-                {courses}
+                <Row>
+                    
+                        {courses}
+                    
+                </Row>
             </Container>
         </Container>
     )
